@@ -46,15 +46,15 @@
     text-transform:uppercase;letter-spacing:.5px}
   .meta-row .val{font-size:clamp(0.9rem,1.8vw,1.2rem);font-weight:700}
 
-  .forecast{display:flex;gap:var(--x)}
-  .day{flex:1;min-width:70px;background:var(--card);border:1px solid var(--card-b);
-    border-radius:20px;display:flex;flex-direction:column;align-items:center;
-    justify-content:center;gap:clamp(4px,1vw,8px);padding:clamp(8px,2vw,14px);backdrop-filter:blur(8px)}
-  .day .dname{font-size:clamp(0.85rem,2vw,1.15rem);font-weight:700;text-transform:capitalize}
-  .day .dicon{font-size:clamp(2rem,5vw,3rem);line-height:1}
-  .day .dtemp{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:700}
-  .day .dtemp .min{color:var(--soft);font-weight:500}
-  .day .drain{font-size:clamp(0.65rem,1.5vw,0.85rem);font-weight:600;color:var(--accent)}
+  .forecast{display:flex;gap:clamp(6px,1.5vw,12px)}
+  .day{flex:1;min-width:60px;background:var(--card);border:1px solid var(--card-b);
+    border-radius:16px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:clamp(3px,0.5vw,6px);padding:clamp(6px,1.5vw,10px);backdrop-filter:blur(8px)}
+  .day .dname{font-size:clamp(0.7rem,1.5vw,0.95rem);font-weight:700;text-transform:capitalize}
+  .day .dicon{font-size:clamp(1.5rem,4vw,2.2rem);line-height:1}
+  .day .dtemp{font-size:clamp(0.75rem,2vw,1rem);font-weight:700}
+  .day .dtemp .min{color:var(--soft);font-weight:500;font-size:0.85em}
+  .day .drain{font-size:clamp(0.55rem,1vw,0.7rem);font-weight:600;color:var(--accent)}
 
   .err{position:fixed;bottom:10px;left:10px;font-size:.8rem;color:#ff8080}
 </style>
