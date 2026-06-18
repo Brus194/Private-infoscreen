@@ -12,36 +12,37 @@
     font-family:'Inter',system-ui,sans-serif;color:#fff;
     -webkit-font-smoothing:antialiased}
 
-  .wrap{height:100vh;width:100vw;display:flex;flex-direction:column;padding:12px;gap:10px}
+  .wrap{height:100vh;width:100vw;display:flex;flex-direction:column;padding:1vh 1.5vw;gap:1vh}
 
-  header{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center}
-  .title{font-size:2vw;font-weight:800;line-height:1}
-  .loc{font-size:1.3vw;color:rgba(255,255,255,.7);margin-top:2px}
-  .clock .t{font-size:2vw;font-weight:700;text-align:right}
-  .clock .d{font-size:1.2vw;color:rgba(255,255,255,.7);text-align:right;text-transform:capitalize}
+  header{flex:0 0 8vh;display:flex;justify-content:space-between;align-items:center}
+  .title{font-size:4vh;font-weight:800;line-height:1}
+  .loc{font-size:2vh;color:rgba(255,255,255,.7);margin-top:2px}
+  .clock{text-align:right}
+  .clock .t{font-size:4vh;font-weight:700;line-height:1}
+  .clock .d{font-size:1.8vh;color:rgba(255,255,255,.7);text-transform:capitalize}
 
   .today{flex:1 1 0;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
-    border-radius:16px;padding:2vw;display:flex;flex-direction:column;
-    justify-content:space-evenly;backdrop-filter:blur(8px)}
-  .today-left{display:flex;align-items:center;gap:3vw;flex:1}
-  .today-icon{font-size:15vw;line-height:1}
-  .today-temp{font-size:14vw;font-weight:800;line-height:1;letter-spacing:-4px}
-  .today-temp span{font-size:6vw;font-weight:500;vertical-align:top}
-  .today-desc{font-size:3vw;color:rgba(255,255,255,.7);margin-top:8px;text-transform:capitalize}
-  .today-meta{display:flex;flex-direction:row;gap:3vw;justify-content:flex-start}
+    border-radius:16px;padding:2vh 3vw;display:flex;align-items:center;
+    justify-content:space-between;backdrop-filter:blur(8px)}
+  .today-left{display:flex;align-items:center;gap:2vw;flex:1;min-width:0}
+  .today-icon{font-size:12vh;line-height:1;flex-shrink:0}
+  .today-temp{font-size:11vh;font-weight:800;line-height:1;letter-spacing:-4px}
+  .today-temp span{font-size:5vh;font-weight:500;vertical-align:top}
+  .today-desc{font-size:3.5vh;color:rgba(255,255,255,.7);margin-top:6px;text-transform:capitalize}
+  .today-meta{display:flex;flex-direction:column;gap:2vh;text-align:right}
   .meta-row{display:flex;flex-direction:column}
-  .meta-row .lbl{font-size:1.2vw;font-weight:600;color:#ffd166;text-transform:uppercase;letter-spacing:.5px}
-  .meta-row .val{font-size:2.5vw;font-weight:700}
+  .meta-row .lbl{font-size:1.5vh;font-weight:600;color:#ffd166;text-transform:uppercase;letter-spacing:.5px}
+  .meta-row .val{font-size:3.5vh;font-weight:700}
 
-  .forecast{flex:0 0 28vh;display:flex;gap:10px}
+  .forecast{flex:0 0 30vh;display:flex;gap:1vw}
   .day{flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
     border-radius:12px;display:flex;flex-direction:column;align-items:center;
-    justify-content:center;gap:1vh;backdrop-filter:blur(8px)}
-  .day .dname{font-size:1.5vw;font-weight:700;text-transform:capitalize}
-  .day .dicon{font-size:4vw;line-height:1}
-  .day .dtemp{font-size:1.8vw;font-weight:700}
+    justify-content:center;gap:0.8vh;backdrop-filter:blur(8px)}
+  .day .dname{font-size:2vh;font-weight:700;text-transform:capitalize}
+  .day .dicon{font-size:6vh;line-height:1}
+  .day .dtemp{font-size:2.5vh;font-weight:700}
   .day .dtemp .min{color:rgba(255,255,255,.6);font-weight:500}
-  .day .drain{font-size:1.2vw;font-weight:600;color:#ffd166}
+  .day .drain{font-size:1.8vh;font-weight:600;color:#ffd166}
 
   .err{position:fixed;bottom:10px;left:10px;font-size:.8rem;color:#ff8080}
 </style>
