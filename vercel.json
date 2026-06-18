@@ -1,5 +1,4 @@
 {
   "buildCommand": "",
-  "outputDirectory": "public",
-  "public": true
+  "outputDirectory": "public"
 }
