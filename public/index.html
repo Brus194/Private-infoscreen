@@ -27,8 +27,8 @@
   .clock .d{font-size:clamp(0.5rem,0.9vw,0.7rem);font-weight:500;color:var(--soft);text-transform:capitalize}
 
   .today{background:var(--card);border:1px solid var(--card-b);
-    border-radius:12px;padding:var(--x);display:flex;align-items:center;
-    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px)}
+    border-radius:12px;padding:clamp(8px,3vw,16px);display:flex;align-items:center;
+    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px);flex:1.5}
   @media (max-width:900px){
     .today{flex-wrap:wrap}
     .today-meta{width:100%;justify-content:flex-start;flex-direction:row;gap:var(--x);margin-top:var(--x)}
@@ -46,7 +46,7 @@
     text-transform:uppercase;letter-spacing:.5px}
   .meta-row .val{font-size:clamp(0.65rem,1.2vw,0.85rem);font-weight:700}
 
-  .forecast{display:flex;gap:clamp(6px,1.5vw,12px)}
+  .forecast{display:flex;gap:clamp(3px,0.8vw,6px);flex:0.8}
   .day{flex:1;min-width:50px;background:var(--card);border:1px solid var(--card-b);
     border-radius:8px;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:clamp(2px,0.4vw,4px);padding:clamp(4px,1vw,6px);backdrop-filter:blur(8px)}
