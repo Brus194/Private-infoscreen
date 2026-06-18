@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vejret – Brønshøj</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#1e3a5f; --bg2:#2c5282; --card:rgba(255,255,255,.10);
+    --card-b:rgba(255,255,255,.16); --white:#fff; --soft:rgba(255,255,255,.72);
+    --accent:#ffd166; --x:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;width:100%;overflow:hidden;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    font-family:'Inter',system-ui,sans-serif;color:var(--white);
+    -webkit-font-smoothing:antialiased}
+  .wrap{height:100vh;width:100vw;display:flex;flex-direction:column;
+    padding:var(--x);gap:var(--x)}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end}
+  .title{font-size:2.4rem;font-weight:800;line-height:1;letter-spacing:-.5px}
+  .loc{font-size:1.1rem;font-weight:500;color:var(--soft);margin-top:6px}
+  .clock{text-align:right}
+  .clock .t{font-size:2.2rem;font-weight:700;line-height:1}
+  .clock .d{font-size:1rem;font-weight:500;color:var(--soft);text-transform:capitalize}
+
+  .today{flex:1.15;background:var(--card);border:1px solid var(--card-b);
+    border-radius:24px;padding:calc(var(--x)*1.4);display:flex;align-items:center;
+    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px)}
+  .today-left{display:flex;align-items:center;gap:calc(var(--x)*1.2)}
+  .today-icon{font-size:6.5rem;line-height:1}
+  .today-temp{font-size:5.5rem;font-weight:800;line-height:.95;letter-spacing:-2px}
+  .today-temp span{font-size:2.5rem;font-weight:500;vertical-align:top}
+  .today-desc{font-size:1.6rem;font-weight:500;color:var(--soft);margin-top:4px;
+    text-transform:capitalize}
+  .today-meta{display:flex;flex-direction:column;gap:14px;text-align:right}
+  .meta-row{display:flex;flex-direction:column}
+  .meta-row .lbl{font-size:.85rem;font-weight:600;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.5px}
+  .meta-row .val{font-size:1.5rem;font-weight:700}
+
+  .forecast{flex:1;display:flex;gap:var(--x)}
+  .day{flex:1;background:var(--card);border:1px solid var(--card-b);
+    border-radius:20px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:8px;padding:14px;backdrop-filter:blur(8px)}
+  .day .dname{font-size:1.15rem;font-weight:700;text-transform:capitalize}
+  .day .dicon{font-size:3rem;line-height:1}
+  .day .dtemp{font-size:1.35rem;font-weight:700}
+  .day .dtemp .min{color:var(--soft);font-weight:500}
+  .day .drain{font-size:.85rem;font-weight:600;color:var(--accent)}
+
+  .err{position:fixed;bottom:10px;left:10px;font-size:.8rem;color:#ff8080}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="title">Vejret</div>
+      <div class="loc">Brønshøj</div>
+    </div>
+    <div class="clock">
+      <div class="t" id="clock">--:--</div>
+      <div class="d" id="date">–</div>
+    </div>
+  </header>
+
+  <div class="today" id="today">
+    <div class="today-left">
+      <div class="today-icon" id="t-icon">·</div>
+      <div>
+        <div class="today-temp" id="t-temp">–<span>°</span></div>
+        <div class="today-desc" id="t-desc">Henter vejr…</div>
+      </div>
+    </div>
+    <div class="today-meta">
+      <div class="meta-row"><span class="lbl">Føles som</span><span class="val" id="t-feels">–°</span></div>
+      <div class="meta-row"><span class="lbl">Vind</span><span class="val" id="t-wind">–</span></div>
+      <div class="meta-row"><span class="lbl">Nedbør</span><span class="val" id="t-rain">–</span></div>
+    </div>
+  </div>
+
+  <div class="forecast" id="forecast"></div>
+</div>
+<div class="err" id="err"></div>
+
+<script>
+const LAT=55.7038, LON=12.4992; // Brønshøj
+const DAYS=['Søn','Man','Tir','Ons','Tor','Fre','Lør'];
+
+function wmo(code){
+  const m={
+    0:['☀️','Klart'],1:['🌤️','Mest klart'],2:['⛅','Delvist skyet'],3:['☁️','Overskyet'],
+    45:['🌫️','Tåge'],48:['🌫️','Rimtåge'],
+    51:['🌦️','Let støvregn'],53:['🌦️','Støvregn'],55:['🌧️','Kraftig støvregn'],
+    61:['🌦️','Let regn'],63:['🌧️','Regn'],65:['🌧️','Kraftig regn'],
+    66:['🌧️','Isregn'],67:['🌧️','Kraftig isregn'],
+    71:['🌨️','Let sne'],73:['🌨️','Sne'],75:['❄️','Kraftig sne'],77:['🌨️','Snekorn'],
+    80:['🌦️','Byger'],81:['🌧️','Regnbyger'],82:['⛈️','Kraftige byger'],
+    85:['🌨️','Snebyger'],86:['❄️','Kraftige snebyger'],
+    95:['⛈️','Tordenvejr'],96:['⛈️','Torden m. hagl'],99:['⛈️','Kraftig torden']
+  };
+  return m[code]||['❓','–'];
+}
+
+function clock(){
+  const n=new Date();
+  document.getElementById('clock').textContent=
+    n.toLocaleTimeString('da-DK',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('date').textContent=
+    n.toLocaleDateString('da-DK',{weekday:'long',day:'numeric',month:'long'});
+}
+
+async function load(){
+  const url=`https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}`
+    +`&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation`
+    +`&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max`
+    +`&timezone=Europe%2FCopenhagen&forecast_days=5&wind_speed_unit=ms`;
+  try{
+    const r=await fetch(url); const d=await r.json();
+    const c=d.current, [ci,ct]=wmo(c.weather_code);
+    document.getElementById('t-icon').textContent=ci;
+    document.getElementById('t-temp').innerHTML=Math.round(c.temperature_2m)+'<span>°</span>';
+    document.getElementById('t-desc').textContent=ct;
+    document.getElementById('t-feels').textContent=Math.round(c.apparent_temperature)+'°';
+    document.getElementById('t-wind').textContent=Math.round(c.wind_speed_10m)+' m/s';
+    document.getElementById('t-rain').textContent=(c.precipitation??0)+' mm';
+
+    const f=document.getElementById('forecast'); f.innerHTML='';
+    const dl=d.daily;
+    for(let i=0;i<5;i++){
+      const dt=new Date(dl.time[i]); const [ic]=wmo(dl.weather_code[i]);
+      const el=document.createElement('div'); el.className='day';
+      el.innerHTML=`<div class="dname">${i===0?'I dag':DAYS[dt.getDay()]}</div>
+        <div class="dicon">${ic}</div>
+        <div class="dtemp">${Math.round(dl.temperature_2m_max[i])}° <span class="min">${Math.round(dl.temperature_2m_min[i])}°</span></div>
+        <div class="drain">💧 ${dl.precipitation_probability_max[i]??0}%</div>`;
+      f.appendChild(el);
+    }
+    document.getElementById('err').textContent='';
+  }catch(e){
+    document.getElementById('err').textContent='Kunne ikke hente vejrdata – prøver igen.';
+  }
+}
+
+clock(); load();
+setInterval(clock,1000*30);
+setInterval(load,1000*60*30);
+</script>
+</body>
+</html>
