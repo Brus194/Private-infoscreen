@@ -26,10 +26,15 @@
   .clock .t{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1}
   .clock .d{font-size:clamp(0.7rem,1.5vw,1rem);font-weight:500;color:var(--soft);text-transform:capitalize}
 
-  .today{flex:0 1 auto;min-height:140px;background:var(--card);border:1px solid var(--card-b);
-    border-radius:24px;padding:calc(var(--x)*1.4);display:flex;align-items:center;
-    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px)}
-  .today-left{display:flex;align-items:center;gap:calc(var(--x)*1.2)}
+  .today{flex:0 1 auto;min-height:auto;background:var(--card);border:1px solid var(--card-b);
+    border-radius:24px;padding:calc(var(--x)*1.4);display:flex;align-items:stretch;
+    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px);flex-wrap:wrap}
+  @media (max-width:768px){
+    .today{flex-direction:column}
+    .today-meta{width:100%;justify-content:flex-start;flex-direction:row;gap:var(--x)}
+    .meta-row{flex:1}
+  }
+  .today-left{display:flex;align-items:center;gap:calc(var(--x)*1.2);flex:1}
   .today-icon{font-size:clamp(3rem,10vw,5rem);line-height:1}
   .today-temp{font-size:clamp(2.2rem,7vw,4rem);font-weight:800;line-height:.95;letter-spacing:-2px}
   .today-temp span{font-size:clamp(1.2rem,3vw,2rem);font-weight:500;vertical-align:top}
@@ -42,9 +47,9 @@
   .meta-row .val{font-size:clamp(0.9rem,1.8vw,1.2rem);font-weight:700}
 
   .forecast{flex:0 1 auto;min-height:100px;display:flex;gap:var(--x)}
-  .day{flex:1;background:var(--card);border:1px solid var(--card-b);
+  .day{flex:1;min-width:70px;background:var(--card);border:1px solid var(--card-b);
     border-radius:20px;display:flex;flex-direction:column;align-items:center;
-    justify-content:center;gap:8px;padding:14px;backdrop-filter:blur(8px)}
+    justify-content:center;gap:clamp(4px,1vw,8px);padding:clamp(8px,2vw,14px);backdrop-filter:blur(8px)}
   .day .dname{font-size:clamp(0.85rem,2vw,1.15rem);font-weight:700;text-transform:capitalize}
   .day .dicon{font-size:clamp(2rem,5vw,3rem);line-height:1}
   .day .dtemp{font-size:clamp(1rem,2.5vw,1.35rem);font-weight:700}
