@@ -21,16 +21,17 @@
   .clock .d{font-size:1.2vw;color:rgba(255,255,255,.7);text-align:right;text-transform:capitalize}
 
   .today{flex:1 1 0;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
-    border-radius:16px;padding:3vw;display:flex;align-items:center;
-    justify-content:space-between;backdrop-filter:blur(8px)}
-  .today-left{display:flex;align-items:center;gap:2vw}
-  .today-icon{font-size:8vw;line-height:1}
-  .today-temp{font-size:7vw;font-weight:800;line-height:1;letter-spacing:-2px}
-  .today-temp span{font-size:3vw;font-weight:500;vertical-align:top}
-  .today-desc{font-size:1.8vw;color:rgba(255,255,255,.7);margin-top:4px;text-transform:capitalize}
-  .today-meta{display:flex;flex-direction:column;gap:1.5vw;text-align:right}
-  .meta-row .lbl{font-size:1vw;font-weight:600;color:#ffd166;text-transform:uppercase;letter-spacing:.5px}
-  .meta-row .val{font-size:2vw;font-weight:700}
+    border-radius:16px;padding:2vw;display:flex;flex-direction:column;
+    justify-content:space-evenly;backdrop-filter:blur(8px)}
+  .today-left{display:flex;align-items:center;gap:3vw;flex:1}
+  .today-icon{font-size:15vw;line-height:1}
+  .today-temp{font-size:14vw;font-weight:800;line-height:1;letter-spacing:-4px}
+  .today-temp span{font-size:6vw;font-weight:500;vertical-align:top}
+  .today-desc{font-size:3vw;color:rgba(255,255,255,.7);margin-top:8px;text-transform:capitalize}
+  .today-meta{display:flex;flex-direction:row;gap:3vw;justify-content:flex-start}
+  .meta-row{display:flex;flex-direction:column}
+  .meta-row .lbl{font-size:1.2vw;font-weight:600;color:#ffd166;text-transform:uppercase;letter-spacing:.5px}
+  .meta-row .val{font-size:2.5vw;font-weight:700}
 
   .forecast{flex:0 0 28vh;display:flex;gap:10px}
   .day{flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);
