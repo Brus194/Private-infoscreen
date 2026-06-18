@@ -16,7 +16,7 @@
     background:linear-gradient(135deg,var(--bg1),var(--bg2));
     font-family:'Inter',system-ui,sans-serif;color:var(--white);
     -webkit-font-smoothing:antialiased}
-  .wrap{min-height:100vh;width:100vw;display:flex;flex-direction:column;
+  .wrap{width:100vw;display:flex;flex-direction:column;
     padding:var(--x);gap:var(--x)}
 
   header{display:flex;justify-content:space-between;align-items:flex-end}
@@ -26,12 +26,12 @@
   .clock .t{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;line-height:1}
   .clock .d{font-size:clamp(0.7rem,1.5vw,1rem);font-weight:500;color:var(--soft);text-transform:capitalize}
 
-  .today{flex:0 1 auto;min-height:auto;background:var(--card);border:1px solid var(--card-b);
-    border-radius:24px;padding:calc(var(--x)*1.4);display:flex;align-items:stretch;
-    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px);flex-wrap:wrap}
-  @media (max-width:768px){
-    .today{flex-direction:column}
-    .today-meta{width:100%;justify-content:flex-start;flex-direction:row;gap:var(--x)}
+  .today{background:var(--card);border:1px solid var(--card-b);
+    border-radius:24px;padding:var(--x);display:flex;align-items:center;
+    justify-content:space-between;gap:var(--x);backdrop-filter:blur(8px)}
+  @media (max-width:900px){
+    .today{flex-wrap:wrap}
+    .today-meta{width:100%;justify-content:flex-start;flex-direction:row;gap:var(--x);margin-top:var(--x)}
     .meta-row{flex:1}
   }
   .today-left{display:flex;align-items:center;gap:calc(var(--x)*1.2);flex:1}
@@ -46,7 +46,7 @@
     text-transform:uppercase;letter-spacing:.5px}
   .meta-row .val{font-size:clamp(0.9rem,1.8vw,1.2rem);font-weight:700}
 
-  .forecast{flex:0 1 auto;min-height:100px;display:flex;gap:var(--x)}
+  .forecast{display:flex;gap:var(--x)}
   .day{flex:1;min-width:70px;background:var(--card);border:1px solid var(--card-b);
     border-radius:20px;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:clamp(4px,1vw,8px);padding:clamp(8px,2vw,14px);backdrop-filter:blur(8px)}
